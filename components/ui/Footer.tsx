@@ -79,6 +79,18 @@ export default function Footer() {
             <a href="mailto:info@autospremium.com" className="hover:text-slate-400 transition-colors">
               info@autospremium.com
             </a>
+            {' · '}
+            <span className="text-slate-500">
+              Desarrollado por{' '}
+              <a
+                href="https://autotechiasolutions.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-400 transition-colors font-medium"
+              >
+                AutoTechIA Solutions
+              </a>
+            </span>
           </p>
           <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1 order-1 sm:order-2">
             {LEGAL_LINKS.map(({ href, label }) => (
