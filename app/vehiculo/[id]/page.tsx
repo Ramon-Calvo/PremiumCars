@@ -48,9 +48,26 @@ export async function generateMetadata({
   const { id } = await params
   const vehicle = await getVehicle(id)
   if (!vehicle) return { title: 'Vehículo no encontrado' }
+
+  const title = `${vehicle.brand} ${vehicle.model}${vehicle.version ? ' ' + vehicle.version : ''} · ${vehicle.year}`
+  const description = `${vehicle.brand} ${vehicle.model}${vehicle.version ? ' ' + vehicle.version : ''}, ${vehicle.year}, ${vehicle.kilometers.toLocaleString('es-ES')} km. ${vehicle.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })}.`
+  const image = vehicle.images?.[0] ?? 'https://www.reportmotor.es/og-default.jpg'
+
   return {
-    title: `${vehicle.brand} ${vehicle.model} ${vehicle.version ?? ''} · ${vehicle.year}`,
-    description: `${vehicle.brand} ${vehicle.model} ${vehicle.version ?? ''}, ${vehicle.year}, ${vehicle.kilometers.toLocaleString('es-ES')} km. ${vehicle.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })}.`,
+    title,
+    description,
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      images: [{ url: image, width: 1200, height: 630, alt: `${vehicle.brand} ${vehicle.model}` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+    },
   }
 }
 
@@ -87,8 +104,38 @@ export default async function VehiculoPage({
     ...(vehicle.owners ? [{ icon: Users, label: 'Propietarios', value: String(vehicle.owners) }] : []),
   ]
 
+  const vehicleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Car',
+    name: `${vehicle.brand} ${vehicle.model}${vehicle.version ? ' ' + vehicle.version : ''}`,
+    brand: { '@type': 'Brand', name: vehicle.brand },
+    model: vehicle.model,
+    vehicleModelDate: String(vehicle.year),
+    description: vehicle.description ?? undefined,
+    image: vehicle.images?.[0] ?? undefined,
+    mileageFromOdometer: {
+      '@type': 'QuantitativeValue',
+      value: vehicle.kilometers,
+      unitCode: 'KMT',
+    },
+    fuelType: vehicle.fuel_type,
+    vehicleTransmission: vehicle.transmission,
+    ...(vehicle.horsepower ? { vehicleEngine: { '@type': 'EngineSpecification', enginePower: { '@type': 'QuantitativeValue', value: vehicle.horsepower, unitCode: 'BHP' } } } : {}),
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'EUR',
+      price: vehicle.price,
+      availability: vehicle.status === 'available' ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+      seller: { '@type': 'AutoDealer', name: 'ReportMotor Sales' },
+    },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(vehicleJsonLd) }}
+      />
       <div className="pt-20 pb-24 md:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
@@ -135,14 +182,18 @@ export default async function VehiculoPage({
                 <div className="grid grid-cols-4 gap-2">
                   {vehicle.images.slice(1, 5).map((img, i) => (
                     <div key={i} className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-100">
-                      <Image src={img} alt={`Vista ${i + 2}`} fill sizes="200px" className="object-cover hover:scale-105 transition-transform cursor-pointer" />
+                      <Image src={img} alt={`${vehicle.brand} ${vehicle.model} - Vista ${i + 2} de ${vehicle.images.length}`} fill sizes="200px" className="object-cover hover:scale-105 transition-transform cursor-pointer" />
                     </div>
                   ))}
                 </div>
               )}
 
               {/* 3D Viewer */}
-              <CarViewer3DClient modelUrl={vehicle.model_3d_url ?? ''} />
+              <CarViewer3DClient
+                images={vehicle.images ?? []}
+                brand={vehicle.brand}
+                model={vehicle.model}
+              />
 
               {/* Description */}
               {vehicle.description && (
@@ -246,7 +297,7 @@ export default async function VehiculoPage({
                 {/* Contact */}
                 <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2">
                   <a
-                    href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34600000000'}?text=${encodeURIComponent(`Hola, me interesa el ${vehicle.brand} ${vehicle.model} (ref. ${vehicle.id})`)}`}
+                    href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34604955023'}?text=${encodeURIComponent(`Hola, me interesa el ${vehicle.brand} ${vehicle.model} (ref. ${vehicle.id})`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-3 flex items-center justify-center gap-2 rounded-xl border border-slate-200 hover:border-green-400 hover:bg-green-50 text-sm text-slate-500 hover:text-green-700 transition-all"
@@ -255,10 +306,10 @@ export default async function VehiculoPage({
                     Consultar por WhatsApp
                   </a>
                   <a
-                    href="tel:+34910123456"
+                    href="tel:+34604955023"
                     className="w-full py-3 flex items-center justify-center gap-2 rounded-xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50 text-sm text-slate-500 hover:text-blue-700 transition-all"
                   >
-                    Llamar: 910 123 456
+                    Llamar: 604 955 023
                   </a>
                 </div>
               </div>

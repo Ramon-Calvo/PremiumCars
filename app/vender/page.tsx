@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   title: 'Vender mi coche · Tasación gratuita en 24h',
   description:
     'Vende tu coche de forma rápida, segura y al mejor precio con ReportMotor Sales. Tasación gratuita en 24 horas, sin publicar anuncios ni perder el tiempo.',
+  openGraph: {
+    title: 'Vende tu coche rápido y al mejor precio | ReportMotor Sales',
+    description: 'Tasación gratuita en 24 horas, pago inmediato. Sin publicar anuncios ni perder el tiempo.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vender mi coche | ReportMotor Sales',
+  },
 }
 
 const BENEFITS = [
@@ -199,11 +207,11 @@ export default function VenderPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:+34910123456"
+              href="tel:+34604955023"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl transition-all"
             >
               <Phone className="w-4 h-4" />
-              910 123 456
+              604 955 023
             </a>
             <Link
               href="/contacto"

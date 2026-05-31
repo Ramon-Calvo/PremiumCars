@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { Send, CheckCircle } from 'lucide-react'
+import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { submitSellRequest } from '@/app/actions/submitSellRequest'
 
 const FUEL_OPTIONS = ['Gasolina', 'Diésel', 'Híbrido', 'Eléctrico', 'GLP', 'Otro']
 const TRANSMISSION_OPTIONS = ['Manual', 'Automático']
@@ -9,6 +10,7 @@ const TRANSMISSION_OPTIONS = ['Manual', 'Automático']
 export default function SellForm() {
   const [isPending, startTransition] = useTransition()
   const [sent, setSent] = useState(false)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [form, setForm] = useState({
     name: '',
     phone: '',
@@ -28,9 +30,14 @@ export default function SellForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    setErrorMsg(null)
     startTransition(async () => {
-      await new Promise((r) => setTimeout(r, 1000))
-      setSent(true)
+      const result = await submitSellRequest(form)
+      if (result.success) {
+        setSent(true)
+      } else {
+        setErrorMsg(result.error ?? 'Error al enviar la solicitud. Por favor, inténtalo de nuevo.')
+      }
     })
   }
 
@@ -58,22 +65,24 @@ export default function SellForm() {
           <label className="block text-xs font-medium text-slate-600 mb-1">Nombre *</label>
           <input
             required
+            disabled={isPending}
             name="name"
             value={form.name}
             onChange={handleChange}
             placeholder="Tu nombre"
-            className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
           />
         </div>
         <div>
           <label className="block text-xs font-medium text-slate-600 mb-1">Teléfono *</label>
           <input
             required
+            disabled={isPending}
             name="phone"
             value={form.phone}
             onChange={handleChange}
             placeholder="600 000 000"
-            className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
           />
         </div>
       </div>
@@ -82,11 +91,12 @@ export default function SellForm() {
         <input
           required
           type="email"
+          disabled={isPending}
           name="email"
           value={form.email}
           onChange={handleChange}
           placeholder="tu@email.com"
-          className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
         />
       </div>
 
@@ -97,53 +107,58 @@ export default function SellForm() {
             <label className="block text-xs font-medium text-slate-600 mb-1">Marca *</label>
             <input
               required
+              disabled={isPending}
               name="brand"
               value={form.brand}
               onChange={handleChange}
               placeholder="Ej. Volkswagen"
-              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-slate-600 mb-1">Modelo *</label>
             <input
               required
+              disabled={isPending}
               name="model"
               value={form.model}
               onChange={handleChange}
               placeholder="Ej. Golf"
-              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-slate-600 mb-1">Año *</label>
             <input
               required
+              disabled={isPending}
               name="year"
               value={form.year}
               onChange={handleChange}
               placeholder="2019"
-              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-slate-600 mb-1">Kilómetros *</label>
             <input
               required
+              disabled={isPending}
               name="km"
               value={form.km}
               onChange={handleChange}
               placeholder="85.000"
-              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
             />
           </div>
           <div>
             <label className="block text-xs font-medium text-slate-600 mb-1">Combustible</label>
             <select
+              disabled={isPending}
               name="fuel"
               value={form.fuel}
               onChange={handleChange}
-              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
             >
               {FUEL_OPTIONS.map((f) => <option key={f}>{f}</option>)}
             </select>
@@ -151,10 +166,11 @@ export default function SellForm() {
           <div>
             <label className="block text-xs font-medium text-slate-600 mb-1">Cambio</label>
             <select
+              disabled={isPending}
               name="transmission"
               value={form.transmission}
               onChange={handleChange}
-              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60"
             >
               {TRANSMISSION_OPTIONS.map((t) => <option key={t}>{t}</option>)}
             </select>
@@ -165,12 +181,13 @@ export default function SellForm() {
       <div>
         <label className="block text-xs font-medium text-slate-600 mb-1">Notas adicionales</label>
         <textarea
+          disabled={isPending}
           name="notes"
           value={form.notes}
           onChange={handleChange}
           rows={3}
           placeholder="Estado del coche, extras, reparaciones recientes..."
-          className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+          className="w-full px-3 py-2.5 text-sm border border-slate-200 rounded-xl bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none disabled:opacity-60"
         />
       </div>
 
@@ -190,6 +207,13 @@ export default function SellForm() {
       <p className="text-xs text-center text-slate-400">
         Sin compromiso. Respuesta en menos de 24 horas.
       </p>
+
+      {errorMsg && (
+        <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          {errorMsg}
+        </div>
+      )}
     </form>
   )
 }

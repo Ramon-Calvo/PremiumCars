@@ -4,7 +4,7 @@ import { FileText } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Términos y Condiciones | ReportMotor Sales',
   description:
-    'Condiciones generales de compraventa y uso del servicio de ReportMotor Sales.',
+    'Condiciones generales de compraventa y uso del servicio de Premium Autos S.L. (ReportMotor).',
   robots: { index: true, follow: true },
 }
 
@@ -28,7 +28,7 @@ export default function TerminosPage() {
           </div>
           <p className="text-slate-600 text-sm leading-relaxed">
             Las presentes condiciones generales regulan la contratación de los servicios y la
-            compraventa de vehículos a través del sitio web de ReportMotor Sales, S.L. La
+            compraventa de vehículos a través del sitio web de Premium Autos S.L. La
             aceptación de estas condiciones es requisito previo imprescindible para la realización
             de cualquier reserva o compra.
           </p>
@@ -42,8 +42,8 @@ export default function TerminosPage() {
               1. Partes del contrato
             </h2>
             <p>
-              <strong>Vendedor:</strong> ReportMotor Sales, S.L., con CIF B-12345678, domicilio
-              en Calle Ejemplo, 1, 28001 Madrid (en adelante, «ReportMotor»).
+              <strong>Vendedor:</strong> Premium Autos S.L., con CIF B-87654321, domicilio
+              en Ciudad Real (en adelante, «Premium Autos»).
             </p>
             <p className="mt-2">
               <strong>Comprador:</strong> Persona física o jurídica mayor de 18 años que realiza

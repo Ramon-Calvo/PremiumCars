@@ -9,7 +9,7 @@ import CookieBanner from '@/components/ui/CookieBanner'
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.reportmotorsales.com'),
+  metadataBase: new URL('https://www.reportmotor.es'),
   title: {
     default: 'ReportMotor Sales | Coches de Segunda Mano Certificados',
     template: '%s | ReportMotor Sales',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_ES',
     siteName: 'ReportMotor Sales',
-    url: 'https://www.reportmotorsales.com',
+    url: 'https://www.reportmotor.es',
   },
   twitter: {
     card: 'summary_large_image',
@@ -34,8 +34,36 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const orgJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'AutoDealer',
+    name: 'ReportMotor Sales',
+    legalName: 'Premium Autos S.L.',
+    url: 'https://www.reportmotor.es',
+    logo: 'https://www.reportmotor.es/logo.png',
+    description: 'Coches de segunda mano certificados con historial DGT verificado, garantía 12 meses y financiación en 30 minutos.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Ciudad Real',
+      addressCountry: 'ES',
+    },
+    telephone: '+34604955023',
+    email: 'info@autospremium.com',
+    sameAs: [
+      'https://www.instagram.com/reportmotor',
+      'https://www.facebook.com/reportmotor',
+    ],
+  }
+
   return (
     <html lang="es" className={inter.className}>
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+      </head>
       <body className="bg-slate-50 text-slate-900 antialiased">
         <Navbar />
         <main>{children}</main>

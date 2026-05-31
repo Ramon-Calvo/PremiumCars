@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { submitContact } from '@/app/actions/submitContact'
 
 const SUBJECT_OPTIONS = [
   'Consulta sobre un vehículo',
@@ -22,6 +23,8 @@ export default function ContactForm() {
     message: '',
   })
 
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -30,12 +33,17 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    setErrorMsg(null)
 
     startTransition(async () => {
-      // In a real project this would call a Server Action or API route
-      await new Promise((res) => setTimeout(res, 1200))
-      setStatus('success')
-      setForm({ name: '', email: '', phone: '', subject: SUBJECT_OPTIONS[0], message: '' })
+      const result = await submitContact(form)
+      if (result.success) {
+        setStatus('success')
+        setForm({ name: '', email: '', phone: '', subject: SUBJECT_OPTIONS[0], message: '' })
+      } else {
+        setStatus('error')
+        setErrorMsg(result.error ?? 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.')
+      }
     })
   }
 
@@ -74,10 +82,11 @@ export default function ContactForm() {
             name="name"
             type="text"
             required
+            disabled={isPending}
             value={form.name}
             onChange={handleChange}
             placeholder="Tu nombre completo"
-            className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-60"
           />
         </div>
         <div>
@@ -88,10 +97,11 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             type="tel"
+            disabled={isPending}
             value={form.phone}
             onChange={handleChange}
             placeholder="600 000 000"
-            className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-60"
           />
         </div>
       </div>
@@ -105,10 +115,11 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
+          disabled={isPending}
           value={form.email}
           onChange={handleChange}
           placeholder="tu@email.com"
-          className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
+          className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-60"
         />
       </div>
 
@@ -119,9 +130,10 @@ export default function ContactForm() {
         <select
           id="subject"
           name="subject"
+          disabled={isPending}
           value={form.subject}
           onChange={handleChange}
-          className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer"
+          className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer disabled:opacity-60"
         >
           {SUBJECT_OPTIONS.map((opt) => (
             <option key={opt} value={opt}>
@@ -140,17 +152,18 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
+          disabled={isPending}
           value={form.message}
           onChange={handleChange}
           placeholder="Cuéntanos en qué podemos ayudarte..."
-          className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+          className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors resize-none disabled:opacity-60"
         />
       </div>
 
       {status === 'error' && (
         <div className="flex items-center gap-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
           <AlertCircle className="w-4 h-4 shrink-0" />
-          Error al enviar el mensaje. Por favor, inténtalo de nuevo.
+          {errorMsg ?? 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.'}
         </div>
       )}
 

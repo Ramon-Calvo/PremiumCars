@@ -61,9 +61,9 @@ export default function HeroSearch() {
 
   const handleSearch = useCallback(() => {
     const params = new URLSearchParams()
-    if (brand && brand !== 'Todas las marcas') params.set('brand', brand)
-    if (fuel && fuel !== 'Cualquier combustible') params.set('fuel', fuel)
-    if (maxPrice) params.set('price', maxPrice)
+    if (brand && brand !== 'Todas las marcas') params.set('marca', brand)
+    if (fuel && fuel !== 'Cualquier combustible') params.set('combustible', fuel)
+    if (maxPrice) params.set('precio', maxPrice)
     router.push(`/vehiculos${params.toString() ? `?${params.toString()}` : ''}`)
   }, [brand, fuel, maxPrice, router])
 
@@ -109,13 +109,20 @@ export default function HeroSearch() {
 
       {/* Quick filters */}
       <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-200">
-        {['Eléctrico', 'Híbrido', 'SUV', 'Menos de 15.000€', 'KM0', 'Premium'].map((tag) => (
+        {[
+          { label: 'Eléctrico', href: '/vehiculos?combustible=Eléctrico' },
+          { label: 'Híbrido', href: '/vehiculos?combustible=Híbrido' },
+          { label: 'Menos de 15.000€', href: '/vehiculos?precio=15000' },
+          { label: 'Menos de 20.000€', href: '/vehiculos?precio=20000' },
+          { label: 'Toyota', href: '/vehiculos?marca=Toyota' },
+          { label: 'Volkswagen', href: '/vehiculos?marca=Volkswagen' },
+        ].map(({ label, href }) => (
           <button
-            key={tag}
-            onClick={() => router.push(`/vehiculos?q=${encodeURIComponent(tag)}`)}
+            key={label}
+            onClick={() => router.push(href)}
             className="text-xs text-slate-600 hover:text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-300 transition-all"
           >
-            {tag}
+            {label}
           </button>
         ))}
       </div>

@@ -10,6 +10,14 @@ export const metadata: Metadata = {
   title: 'Coches en venta',
   description:
     'Explora nuestro catálogo de vehículos de segunda mano certificados con historial DGT verificado y garantía incluida.',
+  openGraph: {
+    title: 'Coches de segunda mano certificados | ReportMotor Sales',
+    description: 'Catálogo completo de coches de ocasión certificados. Historial DGT verificado, garantía 12 meses y financiación inmediata.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Catálogo de coches | ReportMotor Sales',
+  },
 }
 
 async function getVehicles(): Promise<Vehicle[]> {
@@ -83,8 +91,8 @@ export default async function VehiculosPage({
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {vehicles.map((vehicle) => (
-                <CarCard key={vehicle.id} vehicle={vehicle} />
+              {vehicles.map((vehicle, i) => (
+                <CarCard key={vehicle.id} vehicle={vehicle} priority={i < 3} />
               ))}
             </div>
           )}

@@ -4,7 +4,7 @@ import { Scale } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Aviso Legal | ReportMotor Sales',
   description:
-    'Aviso legal e información corporativa de ReportMotor Sales conforme a la LSSI-CE.',
+    'Aviso legal e información corporativa de Premium Autos S.L. conforme a la LSSI-CE.',
   robots: { index: true, follow: true },
 }
 
@@ -43,13 +43,13 @@ export default function AvisoLegalPage() {
             <table className="w-full text-sm">
               <tbody className="divide-y divide-slate-100">
                 {[
-                  ['Razón social', 'ReportMotor Sales, S.L.'],
-                  ['CIF', 'B-12345678'],
-                  ['Domicilio social', 'Calle Ejemplo, 1 · 28001 Madrid'],
-                  ['Registro Mercantil', 'Registro Mercantil de Madrid, Tomo 00000, Folio 000, Hoja M-000000'],
-                  ['Email de contacto', 'info@reportmotorsales.com'],
-                  ['Teléfono', '+34 900 000 000'],
-                  ['Sitio web', 'www.reportmotorsales.com'],
+                  ['Razón social', 'Premium Autos S.L.'],
+                  ['CIF', 'B-87654321'],
+                  ['Domicilio social', 'Ciudad Real'],
+                  ['Registro Mercantil', 'Registro Mercantil de Ciudad Real'],
+                  ['Email de contacto', 'info@autospremium.com'],
+                  ['Teléfono', '+34 604 955 023'],
+                  ['Sitio web', 'www.reportmotor.es'],
                 ].map(([label, value]) => (
                   <tr key={label}>
                     <td className="py-2 pr-4 font-medium text-slate-600 w-48 shrink-0">{label}</td>
@@ -67,8 +67,8 @@ export default function AvisoLegalPage() {
             </h2>
             <p>
               El presente Aviso Legal regula el acceso y uso del sitio web{' '}
-              <strong>www.reportmotorsales.com</strong> (en adelante, «el Sitio»), titularidad de
-              ReportMotor Sales, S.L. El acceso al Sitio implica la aceptación plena y sin reservas
+              <strong>www.reportmotor.es</strong> (en adelante, «el Sitio»), titularidad de
+              Premium Autos S.L. El acceso al Sitio implica la aceptación plena y sin reservas
               de las presentes condiciones.
             </p>
             <p className="mt-2">

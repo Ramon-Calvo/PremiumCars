@@ -4,7 +4,7 @@ import { Shield } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Política de Privacidad | ReportMotor Sales',
   description:
-    'Política de privacidad de ReportMotor Sales conforme al RGPD y la LOPDGDD.',
+    'Política de privacidad de Premium Autos S.L. conforme al RGPD y la LOPDGDD.',
   robots: { index: true, follow: true },
 }
 
@@ -27,7 +27,7 @@ export default function PrivacidadPage() {
             </div>
           </div>
           <p className="text-slate-600 text-sm leading-relaxed">
-            En ReportMotor Sales, S.L. tratamos los datos personales de conformidad con el
+            En Premium Autos S.L. tratamos los datos personales de conformidad con el
             Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD). A continuación
             encontrará toda la información sobre cómo recogemos, usamos y protegemos sus datos.
           </p>
@@ -43,11 +43,11 @@ export default function PrivacidadPage() {
             <table className="w-full text-sm">
               <tbody className="divide-y divide-slate-100">
                 {[
-                  ['Identidad', 'ReportMotor Sales, S.L.'],
-                  ['CIF', 'B-12345678'],
-                  ['Dirección', 'Calle Ejemplo, 1 · 28001 Madrid'],
-                  ['Email DPO', 'privacidad@reportmotorsales.com'],
-                  ['Teléfono', '+34 900 000 000'],
+                  ['Identidad', 'Premium Autos S.L.'],
+                  ['CIF', 'B-87654321'],
+                  ['Dirección', 'Ciudad Real'],
+                  ['Email DPO', 'info@autospremium.com'],
+                  ['Teléfono', '+34 604 955 023'],
                 ].map(([label, value]) => (
                   <tr key={label}>
                     <td className="py-2 pr-4 font-medium text-slate-600 w-40 shrink-0">{label}</td>

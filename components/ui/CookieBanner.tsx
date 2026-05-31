@@ -23,14 +23,27 @@ function saveConsent(consent: CookieConsent) {
   try {
     localStorage.setItem(CONSENT_KEY, JSON.stringify(consent))
   } catch {
-    // localStorage no disponible (modo privado, etc.)
+    try {
+      sessionStorage.setItem(CONSENT_KEY, JSON.stringify(consent))
+    } catch {
+      // Ni localStorage ni sessionStorage disponibles
+    }
   }
 }
 
 function loadConsent(): CookieConsent | null {
+  let raw: string | null = null
   try {
-    const raw = localStorage.getItem(CONSENT_KEY)
-    if (!raw) return null
+    raw = localStorage.getItem(CONSENT_KEY)
+  } catch {
+    try {
+      raw = sessionStorage.getItem(CONSENT_KEY)
+    } catch {
+      return null
+    }
+  }
+  if (!raw) return null
+  try {
     const parsed: CookieConsent = JSON.parse(raw)
     // Invalidar si la versión no coincide (nueva política)
     if (parsed.version !== CONSENT_VERSION) return null

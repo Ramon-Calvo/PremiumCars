@@ -5,6 +5,7 @@ import type { Vehicle } from '@/types'
 
 interface CarCardProps {
   vehicle: Vehicle
+  priority?: boolean
 }
 
 const DGT_BADGE: Record<string, string> = {
@@ -22,7 +23,7 @@ function formatPrice(price: number) {
   return price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
 }
 
-export default function CarCard({ vehicle }: CarCardProps) {
+export default function CarCard({ vehicle, priority = false }: CarCardProps) {
   const hasDiscount = vehicle.original_price && vehicle.original_price > vehicle.price
   const discountPct = hasDiscount
     ? Math.round(((vehicle.original_price! - vehicle.price) / vehicle.original_price!) * 100)
@@ -39,6 +40,7 @@ export default function CarCard({ vehicle }: CarCardProps) {
             src={imageSrc}
             alt={`${vehicle.brand} ${vehicle.model} ${vehicle.version}`}
             fill
+            priority={priority}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
@@ -65,6 +67,13 @@ export default function CarCard({ vehicle }: CarCardProps) {
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
               <span className="bg-amber-500 text-white font-bold px-4 py-2 rounded-xl text-sm">
                 Reservado
+              </span>
+            </div>
+          )}
+          {vehicle.status === 'sold' && (
+            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+              <span className="bg-red-600 text-white font-bold px-4 py-2 rounded-xl text-sm">
+                Vendido
               </span>
             </div>
           )}

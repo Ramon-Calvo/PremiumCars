@@ -4,6 +4,7 @@ import {
   CreditCard, CheckCircle, Clock, Shield, TrendingDown,
   Calculator, Phone, ChevronRight, Star, Percent,
 } from 'lucide-react'
+import FinanceRequestForm from './FinanceRequestForm'
 
 export const metadata: Metadata = {
   title: 'Financiación · Aprobación en 30 minutos',
@@ -53,7 +54,7 @@ const STEPS = [
   {
     num: '02',
     title: 'Solicita la financiación',
-    desc: 'Rellena el formulario online o pide cita con nuestro asesor. Solo necesitas DNI, nóminas y extracto bancario.',
+    desc: 'Rellena el formulario online. Para el estudio necesitarás: DNI por ambas caras, informe de vida laboral, dos últimas nóminas y certificado de titularidad bancaria.',
   },
   {
     num: '03',
@@ -70,7 +71,7 @@ const STEPS = [
 const FAQ = [
   {
     q: '¿Qué documentación necesito?',
-    a: 'DNI o NIE en vigor, las dos últimas nóminas o declaración de renta (autónomos), y un extracto bancario de los últimos 3 meses. Para empresas, cuentas anuales y CIF.',
+    a: 'Para realizar el estudio de financiación necesitamos: DNI por ambas caras, informe de vida laboral actualizado, las dos últimas nóminas y certificado de titularidad bancaria. Tu asesor te guiará paso a paso para facilitarlos.',
   },
   {
     q: '¿Cuál es el plazo mínimo y máximo?',
@@ -231,6 +232,61 @@ export default function FinanciacionPage() {
         </div>
       </section>
 
+      {/* Finance Request Form */}
+      <section className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left: copy */}
+            <div>
+              <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3">
+                Consulta gratuita
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-5">
+                ¿Quieres saber qué financiación <span className="text-orange-500">puedes obtener?</span>
+              </h2>
+              <p className="text-slate-500 leading-relaxed mb-6">
+                Rellena el formulario y un asesor financiero te llamará en menos de 30 minutos
+                con las condiciones reales para tu perfil. Sin consulta a CIRBE, sin compromiso.
+              </p>
+              <ul className="flex flex-col gap-3 mb-6">
+                {[
+                  'Respuesta en 30 minutos en horario laboral',
+                  'Sin impacto en tu historial crediticio (sin consulta a CIRBE)',
+                  'Financiación con Santander Consumer, BBVA y Cetelem',
+                  'Desde 0 € de entrada. Plazos de 12 a 84 meses',
+                  'TIN desde 6,99%. TAE variable según perfil',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600">
+                    <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {/* Documentación necesaria */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Documentación necesaria</p>
+                <ul className="flex flex-col gap-2">
+                  {[
+                    'DNI por ambas caras',
+                    'Informe de vida laboral actualizado',
+                    'Dos últimas nóminas',
+                    'Certificado de titularidad bancaria',
+                  ].map((doc) => (
+                    <li key={doc} className="flex items-center gap-2 text-sm text-slate-700">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                      {doc}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-slate-400 mt-3">Tu asesor te guiará para facilitarlos de forma sencilla.</p>
+              </div>
+            </div>
+            {/* Right: form */}
+            <FinanceRequestForm />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-16 bg-slate-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -267,11 +323,11 @@ export default function FinanciacionPage() {
               <ChevronRight className="w-4 h-4" />
             </Link>
             <a
-              href="tel:+34910123456"
+              href="tel:+34604955023"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl border border-white/20 transition-all"
             >
               <Phone className="w-4 h-4" />
-              910 123 456
+              604 955 023
             </a>
           </div>
         </div>

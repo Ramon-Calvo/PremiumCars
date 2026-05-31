@@ -229,3 +229,8 @@
     background-size: 28px 28px;
   }
 }
+
+@keyframes wa-pop-in {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}

@@ -6,7 +6,7 @@ import CookiePrefsButton from './CookiePrefsButton'
 export const metadata: Metadata = {
   title: 'Política de Cookies',
   description:
-    'Información detallada sobre el uso de cookies en ReportMotor Sales conforme al RGPD y la LSSI-CE.',
+    'Información detallada sobre el uso de cookies en Premium Autos (ReportMotor) conforme al RGPD y la LSSI-CE.',
   robots: { index: true, follow: true },
 }
 
@@ -51,13 +51,13 @@ export default function PoliticaDeCookiesPage() {
         {/* ─── Sección 2 ─────────────────────────────────────────────────── */}
         <Section title="2. Responsable del tratamiento">
           <ul className="text-sm text-slate-600 space-y-1 list-none">
-            <li><strong>Identidad:</strong> ReportMotor Sales S.L.</li>
-            <li><strong>CIF:</strong> B-12345678</li>
-            <li><strong>Domicilio:</strong> C/ Gran Vía 28, 28013 Madrid</li>
+            <li><strong>Identidad:</strong> Premium Autos S.L.</li>
+            <li><strong>CIF:</strong> B-87654321</li>
+            <li><strong>Domicilio:</strong> Ciudad Real</li>
             <li>
               <strong>Contacto DPD / Privacidad:</strong>{' '}
-              <a href="mailto:privacidad@reportmotor.es" className="text-blue-600 hover:underline">
-                privacidad@reportmotor.es
+              <a href="mailto:info@autospremium.com" className="text-blue-600 hover:underline">
+                info@autospremium.com
               </a>
             </li>
           </ul>

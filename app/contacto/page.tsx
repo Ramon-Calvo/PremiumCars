@@ -6,36 +6,44 @@ export const metadata: Metadata = {
   title: 'Contacto',
   description:
     'Contacta con ReportMotor Sales. Estamos disponibles por teléfono, email y WhatsApp para ayudarte a encontrar tu coche o tasar el tuyo.',
+  openGraph: {
+    title: 'Contacto | ReportMotor Sales',
+    description: 'Llama, escribe por WhatsApp o envía un email. Respuesta en menos de 24 horas.',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Contacto | ReportMotor Sales',
+  },
 }
 
 const CONTACT_INFO = [
   {
     icon: Phone,
     title: 'Teléfono',
-    value: '910 123 456',
-    href: 'tel:+34910123456',
+    value: '604 955 023',
+    href: 'tel:+34604955023',
     description: 'Atención personalizada de lunes a sábado',
   },
   {
     icon: MessageCircle,
     title: 'WhatsApp',
-    value: '+34 600 000 000',
-    href: `https://wa.me/34600000000?text=${encodeURIComponent('¡Hola! Me gustaría recibir más información.')}`,
+    value: '+34 604 955 023',
+    href: `https://wa.me/34604955023?text=${encodeURIComponent('¡Hola! Me gustaría recibir más información.')}`,
     description: 'Respuesta en menos de 1 hora',
   },
   {
     icon: Mail,
     title: 'Email',
-    value: 'hola@reportmotor.es',
-    href: 'mailto:hola@reportmotor.es',
+    value: 'info@autospremium.com',
+    href: 'mailto:info@autospremium.com',
     description: 'Respondemos en menos de 24 horas',
   },
   {
     icon: MapPin,
     title: 'Dirección',
-    value: 'C/ Gran Vía 28, 28013 Madrid',
-    href: 'https://maps.google.com',
-    description: 'También con presencia en Barcelona y Valencia',
+    value: 'Ciudad Real',
+    href: 'https://maps.google.com/?q=Ciudad+Real',
+    description: 'Visita nuestra sede',
   },
 ]
 

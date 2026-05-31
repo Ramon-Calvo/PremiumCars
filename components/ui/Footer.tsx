@@ -71,13 +71,13 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-slate-800 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-slate-600 text-center sm:text-left order-2 sm:order-1">
-            © {new Date().getFullYear()} ReportMotor Sales S.L. · CIF B-12345678 ·{' '}
-            <a href="tel:+34910123456" className="hover:text-slate-400 transition-colors">
-              910 123 456
+            © {new Date().getFullYear()} Premium Autos S.L. · CIF B-87654321 ·{' '}
+            <a href="tel:+34604955023" className="hover:text-slate-400 transition-colors">
+              604 955 023
             </a>{' '}
             ·{' '}
-            <a href="mailto:hola@reportmotor.es" className="hover:text-slate-400 transition-colors">
-              hola@reportmotor.es
+            <a href="mailto:info@autospremium.com" className="hover:text-slate-400 transition-colors">
+              info@autospremium.com
             </a>
           </p>
           <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1 order-1 sm:order-2">
