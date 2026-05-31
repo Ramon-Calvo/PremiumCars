@@ -249,7 +249,7 @@ export default function FinanceRequestForm() {
               placeholder="Tu nombre completo"
               required
               className={inputCls}
-              disabled={step === "checking"}
+              disabled={false}
             />
           </div>
           <div>
@@ -264,7 +264,7 @@ export default function FinanceRequestForm() {
               placeholder="600 000 000"
               required
               className={inputCls}
-              disabled={step === "checking"}
+              disabled={false}
             />
           </div>
         </div>
@@ -282,7 +282,7 @@ export default function FinanceRequestForm() {
             placeholder="tu@email.com"
             required
             className={inputCls}
-            disabled={step === "checking"}
+            disabled={false}
           />
         </div>
 
@@ -298,7 +298,7 @@ export default function FinanceRequestForm() {
               onChange={handleChange}
               placeholder="Ej: BMW Serie 3, SUV gasolina…"
               className={inputCls}
-              disabled={step === "checking"}
+              disabled={false}
             />
           </div>
           <div>
@@ -314,7 +314,7 @@ export default function FinanceRequestForm() {
               onChange={handleChange}
               placeholder="Ej: 15000"
               className={inputCls}
-              disabled={step === "checking"}
+              disabled={false}
             />
           </div>
         </div>
@@ -331,7 +331,7 @@ export default function FinanceRequestForm() {
               onChange={handleChange}
               required
               className={inputCls}
-              disabled={step === "checking"}
+              disabled={false}
             >
               {TERM_OPTIONS.map(({ value, label }) => (
                 <option key={value} value={value}>{label}</option>
@@ -348,7 +348,7 @@ export default function FinanceRequestForm() {
               onChange={handleChange}
               required
               className={inputCls}
-              disabled={step === "checking"}
+              disabled={false}
             >
               <option value="" disabled>Selecciona tu situación</option>
               {EMPLOYMENT_OPTIONS.map(({ value, label }) => (
@@ -370,7 +370,7 @@ export default function FinanceRequestForm() {
             placeholder="Cuéntanos cualquier detalle relevante (presupuesto, urgencia, etc.)"
             rows={3}
             className={`${inputCls} resize-none`}
-            disabled={step === "checking"}
+            disabled={false}
           />
         </div>
 
@@ -384,17 +384,10 @@ export default function FinanceRequestForm() {
 
         <button
           type="submit"
-          disabled={step === "checking"}
+          disabled={false}
           className="flex items-center justify-center gap-2 w-full py-3 bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-semibold rounded-xl transition-colors text-sm"
         >
-          {step === "checking" ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              Enviando solicitud…
-            </>
-          ) : (
-            'Solicitar consulta gratuita →'
-          )}
+          Solicitar consulta gratuita →
         </button>
 
         <p className="text-[0.65rem] text-slate-400 text-center leading-relaxed">
