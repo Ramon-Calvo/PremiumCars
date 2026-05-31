@@ -45,6 +45,7 @@
   *::before,
   *::after {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
 
   html {
@@ -57,6 +58,21 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Prevent 300ms tap delay on iOS */
+  button, a, [role='button'] {
+    touch-action: manipulation;
+  }
+
+  /* Prevent iOS Safari from zooming on input focus (requires font-size >= 16px) */
+  @media (max-width: 767px) {
+    input:not([type='range']),
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
   }
 
   ::-webkit-scrollbar {

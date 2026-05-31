@@ -109,7 +109,7 @@ export default async function HomePage() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight text-white">
               Tu próximo coche,{' '}
               <span className="text-gradient-emerald">sin sorpresas.</span>
             </h1>
