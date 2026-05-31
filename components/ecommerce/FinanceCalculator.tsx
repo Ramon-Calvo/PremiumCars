@@ -105,10 +105,6 @@ export default function FinanceCalculator({ basePrice }: FinanceCalculatorProps)
           <span className="text-slate-900 font-medium">{formatCurrency(principal)}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-slate-500">Total intereses</span>
-          <span className="text-slate-700">{formatCurrency(totalInterest)}</span>
-        </div>
-        <div className="flex justify-between text-sm">
           <span className="text-slate-500">Total a pagar</span>
           <span className="text-slate-900 font-semibold">{formatCurrency(totalPaid)}</span>
         </div>
