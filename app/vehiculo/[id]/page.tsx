@@ -244,9 +244,9 @@ export default async function VehiculoPage({
             </div>
 
             {/* ─── RIGHT COLUMN (2/5) ─── */}
-            <div className="lg:col-span-2 flex flex-col gap-5">
+            <div className="lg:col-span-2 flex flex-col gap-5 sticky top-20 self-start overflow-y-auto max-h-[calc(100vh-5.5rem)]">
               {/* Price card */}
-              <div className="card-light p-6 sticky top-20">
+              <div className="card-light p-6">
                 <div className="mb-4">
                   <p className="text-xs text-slate-400 uppercase tracking-widest font-medium mb-0.5">
                     {vehicle.brand}
